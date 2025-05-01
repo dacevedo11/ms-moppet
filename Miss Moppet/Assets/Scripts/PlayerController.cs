@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator;
     public InputActionReference jump;
     public bool grounded = true;
+    public GameObject deathScreen;
     
     private Rigidbody _rb;
     
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             _rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+            animator.SetTrigger("Jump");
             grounded = false;
         }
     }
@@ -29,5 +33,18 @@ public class PlayerController : MonoBehaviour
                 grounded = true;
             }
         }
-       
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacles"))
+        {
+            HandleDeath();
+        }
+    }
+    
+    private void HandleDeath()
+    {
+        Destroy(gameObject);        deathScreen.SetActive(true);
+
+    }
 }
