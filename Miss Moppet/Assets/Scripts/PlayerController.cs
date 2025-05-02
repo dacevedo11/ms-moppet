@@ -43,9 +43,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Crashing
         if (other.CompareTag("Obstacles"))
         {
             HandleDeath();
+        }
+        
+        // Out of Bounds
+        if (other.CompareTag("Bounds"))
+        {
+            AudioManager.instance.PlayDeathSound();
+            Destroy(gameObject);
         }
     }
 
