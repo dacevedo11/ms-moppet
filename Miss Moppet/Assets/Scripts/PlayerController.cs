@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public bool grounded = true;
     public float runSpeed = 5f;
     public GameObject deathParticles;
+    public Canvas gameOverCanvas;
 
     private Rigidbody rb;
 
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
         // Crashing
         if (other.CompareTag("Obstacles"))
         {
+            FindObjectOfType<GameManager>().ShowGameOver(0.5f);
             HandleDeath();
         }
         
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Bounds"))
         {
             AudioManager.instance.PlayDeathSound();
+            FindObjectOfType<GameManager>().ShowGameOver(0f);
             Destroy(gameObject);
         }
     }

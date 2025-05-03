@@ -2,17 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    [SerializeField] Transform targetTransform;
-    [SerializeField] float duration;
-    [SerializeField] LeanTweenType easeType;
-
-    void Start()
+    public void RestartButton()
     {
-        LeanTween.moveX(gameObject, targetTransform.position.x, duration).setEase(easeType);
+        SceneManager.LoadScene("MainScene");
     }
     
-    
+    public void QuitButton()
+    {
+        SceneManager.LoadScene("StartMenu");   
+    }
 }
