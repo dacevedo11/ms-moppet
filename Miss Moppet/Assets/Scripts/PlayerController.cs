@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 5f;
     public GameObject deathParticles;
     public Canvas gameOverCanvas;
+    public Canvas pressSpaceToJumpCanvas;
 
     private Rigidbody rb;
 
@@ -21,6 +22,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
+            if (pressSpaceToJumpCanvas != null)
+            {
+                pressSpaceToJumpCanvas.gameObject.SetActive(false);
+                pressSpaceToJumpCanvas = null;
+            }
+            
             AudioManager.instance.PlayJumpSound();
             rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
             animator.SetTrigger("Jump");
