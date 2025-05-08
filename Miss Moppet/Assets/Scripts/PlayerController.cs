@@ -65,6 +65,13 @@ public class PlayerController : MonoBehaviour
             FindObjectOfType<GameManager>().ShowGameOver(0f);
             Destroy(gameObject);
         }
+        
+        // Crossed Finish Line
+        if (other.CompareTag("FinishLine"))
+        {
+            runSpeed = 0f;
+            animator.SetBool("Finished", true);
+        }
     }
 
     private void HandleDeath()
